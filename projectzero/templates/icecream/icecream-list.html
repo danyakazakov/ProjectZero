@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+            <h1>РОБИНС БАСКИН</h1>
+            <h2>Список мороженого</h2>
+            <div class='d-flex justify-content-between flex-wrap align-items-center'>
+                {% for i in icecreams %}
+                    <div class='card m-3 p-2' style='width: 18rem;'>
+                        {% load thumbnail %}
+                        {% thumbnail i.avatar '300x300' upscale=True as im %}
+                            <img class='card-img-top rounded-circle' src="{{im.url}}">
+                        {% endthumbnail %}
+                        <div class='card-body'>
+                            <h5 class='card-title'>{{i.name}}</h5>
+                            <p class='card-text'>{{i.desc}}</p>
+                            <a class='btn btn-primary' href='{{i.pk}}'>Подробнее</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class='alert alert-success'>
+                <a href="/">На главную</a>
+            </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .rating {
+        display: inline-block; 
+        font-size: 0;
+    }
+    .rating span {
+        padding: 0;
+        font-size: 50px;
+        color: lightgrey;
+        line-height: 1;
+    }
+    .rating > span:before {
+        content: '★';
+    }
+    .rating > span.active {
+        color: gold;
+    }
+    .price {
+        font-size: 80px;
+        font-weight: bold;
+        padding-left: 30px;
+    }
+</style>
+            <h1>РОБИНСБАСКИН</h1>
+            <h2>{{icecream.name}}</h2>
+            <div class='d-flex'>
+                {% load thumbnail %}
+                {% thumbnail icecream.avatar '300x300' upscale=True as im %}
+                    <img class='m-2 img-thumbnail' src="{{im.url}}">
+                {% endthumbnail %}
+                <div class = 'card'>
+                    <div class='card-body p-5'>
+                        <p class='price'>{{icecream.price}}</p>   
+                        <div class='rating'>
+                            {% for i in gold_rating %}
+                                <span class='active'></span>
+                            {% endfor %}
+                            {% for i in empty_rating %}
+                                <span></span>
+                            {% endfor %}
+                        </div> 
+                        <p class='m-2'>{{icecream.desc}}</p> 
+                        <a class='btn btn-primary' href='#'>Купить</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class='alert alert-success'>
+                <a href="../">Вернуться к списку</a>
+            </div>
+            <br>
+            <div class='alert alert-primary'>
+                <a href="/">Вернуться на главную страницу</a>
+            </div>
+ {% endblock %}
