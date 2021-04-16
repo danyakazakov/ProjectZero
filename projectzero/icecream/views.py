@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Icecream
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def icecream_list(request):
     icecreams = Icecream.objects.all()
     context = {
@@ -10,6 +11,7 @@ def icecream_list(request):
     }
     return render(request, 'icecream/icecream-list.html', context)
 
+@login_required
 def icecream_detail(request, pk):
     icecream = get_object_or_404(Icecream, id=pk)
     rating = icecream.rating
